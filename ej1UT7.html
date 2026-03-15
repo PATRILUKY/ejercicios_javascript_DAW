@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title> Ajax: Leer un txt</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="demo"></div>
+        <input type ="button" id="boton" onclick="ejecutar()" value="Funcion Ajax">
+
+
+        <script>
+            // Función que inicia la petición AJAX
+            function ejecutar() {
+
+                // Se crea un nuevo objeto XMLHttpRequest, que permite hacer peticiones al servidor
+                let xhr = new XMLHttpRequest();
+
+                // Se asigna una función que se ejecutará cada vez que cambie el estado de la petición
+                // "funcionAjax" será llamada automáticamente cuando readyState cambie
+                xhr.addEventListener("readystatechange", funcionAjax);
+
+                // Se configura la petición:
+                // - "GET" → método HTTP
+                // - "ej1UT7.txt" → archivo que queremos leer
+                // - true → petición asíncrona
+                xhr.open("GET", "ej1UT7.txt", true);
+
+                // Se envía la petición al servidor
+                xhr.send();
+            }
+
+
+// Función que se ejecuta cada vez que cambia el estado de la petición AJAX
+            function funcionAjax() {
+
+                // this.readyState == 4 → la petición ha terminado
+                // this.status == 200 → el servidor respondió correctamente
+                if (this.readyState == 4 && this.status == 200) {
+
+                    // "demo" es un elemento del DOM (por ejemplo un <div id="demo">)
+                    // Se añade el contenido del archivo (responseText) dentro del elemento
+                    demo.innerHTML += this.responseText;
+                }
+            }
+
+        </script>
+    </body>
+</html>
